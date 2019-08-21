@@ -179,13 +179,12 @@ function capturaImagen(snap){
       url:"/CamaraOcr/camaraOcr/capturaImagen",
   cache: false,
    success:  function(data){
-       console.log("resultado"+ data)
      $("#modalDatos").modal('show');
      $("#datosOcr").html(data);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown){
-       alert("Capture a un INE"); 
-      
+      // alert("Capture a un INE"); 
+      swal();
      }
     
 });

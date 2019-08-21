@@ -56,7 +56,7 @@ class ClasificadorIneService {
          clasificadorine.entity = datos.build()
             response.success = {  resp, json ->
                 resultado = json.Documento
-                //imgOutFile.delete()
+                imgOutFile.delete()
                 println "::" + resp+ "##"+ json.Documento+ "%%"+ json;
                 return resultado
             }
@@ -64,7 +64,7 @@ class ClasificadorIneService {
                 resultado = reader
                 return resultado
                 println "##" + resp +  "##" + reader
-                //imgOutFile.delete()
+                imgOutFile.delete()
             }
         
         }

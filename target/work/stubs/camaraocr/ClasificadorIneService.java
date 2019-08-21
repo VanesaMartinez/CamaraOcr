@@ -7,6 +7,8 @@ import java.net.*;
 import java.util.*;
 import groovy.lang.*;
 import groovy.util.*;
+import static groovyx.net.http.ContentType.*;
+import static groovyx.net.http.Method.*;
 
 @grails.transaction.Transactional() public class ClasificadorIneService
   extends java.lang.Object  implements

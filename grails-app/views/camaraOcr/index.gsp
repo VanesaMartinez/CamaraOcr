@@ -80,24 +80,11 @@
 			
 		</div>
 
-	</div>
          <canvas id="canvasPhoto" height="0" width="0" ></canvas>
-           <div class="modal " id="modalDatos" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Datos Ocr</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div id="datosOcr"></div>
-      </div>
-      <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-    </div>
-  </div>
-</div>
+         
+         
+         
+           
 
 <!--	<script type="text/javascript">
 		$(document).ready(function () {
@@ -133,5 +120,20 @@
 			document.getElementById("Pantalla").style.width= h + "px";
 			
 		 </script>
+                 <div class="modal " id="modalDatos" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Datos Ocr</h5>
+        <a href="#" rel="modal:close">X</a>
+      </div>
+      <div class="modal-body">
+        <div id="datosOcr"></div>
+      </div>
+      <div class="modal-footer">
+                    <a type="button" class="btn btn-default" rel="modal:close">Cerrar</a>
+                </div>
+                 </div></div>
+    
 </body>
 </html>

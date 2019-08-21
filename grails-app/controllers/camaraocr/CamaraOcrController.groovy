@@ -57,13 +57,7 @@ class CamaraOcrController {
               }  
               }
                else{
-                    def respuesta = [:]
-                 respuesta.error= "Ocurrio un problema"
-                  render respuesta as JSON
-                    
-        println"Otro"
-        
-        
+           
         }
     
     
