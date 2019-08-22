@@ -46,7 +46,7 @@ function takeSnapshot() {
     hidden_canvas.height = height;
   
     // Make a copy of the current frame in the video on the canvas.
-    context.drawImage(video, 0, 0, width, height);
+    context.drawImage(video, 0, 0, width, height,  0, 0, width, height);
 
     var photo_focus = document.getElementById("photo-focus");
 //    let srcFinal = cv.imread("canvasPhoto");
@@ -74,7 +74,7 @@ function takeSnapshot() {
    // dst.delete();
 
     // Turn the canvas image into a dataURL that can be used as a src for our photo.
-   var dato = hidden_canvas.toDataURL("image/jpeg",0.1);
+   var dato = hidden_canvas.toDataURL("image/jpeg", 1.0);
   
     return dato;
     
