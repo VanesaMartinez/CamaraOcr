@@ -46,7 +46,7 @@ function takeSnapshot() {
     hidden_canvas.height = height;
   
     // Make a copy of the current frame in the video on the canvas.
-    context.drawImage(video, 0, 0, width, height,  0, 0, width, height);
+    context.drawImage(video, 0, 0, width, height,  0, 0, width, height,0, 0, width, height);
 
     var photo_focus = document.getElementById("photo-focus");
 //    let srcFinal = cv.imread("canvasPhoto");
@@ -74,8 +74,7 @@ function takeSnapshot() {
    // dst.delete();
 
     // Turn the canvas image into a dataURL that can be used as a src for our photo.
-   var dato = hidden_canvas.toDataURL("image/jpeg", 1.0);
-  
+   var dato = hidden_canvas.toDataURL("image/png", 1.0);
     return dato;
     
   }
@@ -99,7 +98,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       video.play();
       //video.height = window.outerHeight;
       video.width = window.outerWidth + 50;
-
+//      var ua = navigator.userAgent.toLowerCase();
+//      var is_safari = ua.indexOf("safari/") > -1 && ua.indexOf("chrome") < 0;
+//      if (is_safari) {
+//        setTimeout(function() {
+//          video.play();
+//        });
 //      src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
 //      cap = new cv.VideoCapture(video);
 
@@ -134,7 +138,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
           let laplace = blurInput(reducedMap);
           reducedMap.delete();
 
-          //let alert = document.getElementById("alert-camera");
+          let alert = document.getElementById("alert-camera");
           var element = document.getElementById("photo-button");
 
           if (
@@ -142,12 +146,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             brightness < LOW_BRIGHTNESS_LIMIT //||
             //laplace < 80
           ) {
-            //alert.style.visibility = "visible";
+            alert.style.visibility = "visible";
             element.classList.add(".icon-deseable");
-            //document.getElementById("alert-text").innerHTML =
-            //"variance:" + laplace + " - brightness:" + brightness;
+            document.getElementById("alert-text").innerHTML =
+            "variance:" + laplace + " - brightness:" + brightness;
           } else {
-            //alert.style.visibility = "hidden";
+            alert.style.visibility = "hidden";
             element.classList.remove(".icon-deseable");
           }
           setTimeout(processVideo, 1000 / FPS);
@@ -157,7 +161,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         }
       }
       let delay = 1000 / FPS;
-      //setInterval(processVideo, delay);
+      setInterval(processVideo, delay);
       setTimeout(processVideo, 1000 / FPS);
     });
     camara.catch(function(stream) {
@@ -183,8 +187,8 @@ function capturaImagen(snap){
      $("#datosOcr").html(data);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown){
-      // alert("Capture a un INE"); 
-      swal();
+     alert("Capture a un INE"); 
+    
      }
     
 });

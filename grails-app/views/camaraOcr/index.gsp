@@ -133,7 +133,8 @@
       <div class="modal-footer">
                     <a type="button" class="btn btn-default" rel="modal:close">Cerrar</a>
                 </div>
-                 </div></div>
+                 </div>
+  </div></div>
     
 </body>
 </html>
