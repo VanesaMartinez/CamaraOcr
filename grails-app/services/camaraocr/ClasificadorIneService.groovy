@@ -23,28 +23,31 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
+    import org.apache.http.entity.mime.MultipartEntityBuilder;
+    import org.apache.http.entity.mime.HttpMultipartMode;
+    import org.apache.http.entity.mime.content.FileBody;
+    import org.apache.http.entity.mime.content.StringBody;
 import sun.misc.BASE64Decoder;
  
 @Transactional
 class ClasificadorIneService {
-
+        
     def serviceMethod() {
 
     }
       def clasificador(String urlimagen,String key,String insti ){
+        
         def  imagenBase64 = urlimagen.tokenize(',')[1]
+        println "name File --> "+ urlimagen.tokenize(',')[0];
+        println "imagenBase64 --> "+ imagenBase64;
         def resultado=[:]
-    byte[] instituto = insti.getBytes("UTF-8")
-     byte[] llave = key.getBytes("UTF-8")
+        byte[] instituto = insti.getBytes("UTF-8")
+        byte[] llave = key.getBytes("UTF-8")
         BASE64Decoder decoder = new BASE64Decoder();
-       byte[] imageByte = decoder.decodeBuffer(imagenBase64);
-         BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageByte));
-       File imgOutFile = new File("Clasificador/imagen.jpg");
-    ImageIO.write(image, "jpg", imgOutFile);
+        byte[] imageByte = decoder.decodeBuffer(imagenBase64);
+        BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageByte));
+        File imgOutFile = new File("/var/uploads/kosmos/documentos/ocr/image.jpeg");
+    ImageIO.write(image, "jpeg", imgOutFile);
      def http = new HTTPBuilder('http://201.161.90.90:82/document_classification')    
         http.request(POST){  clasificadorine ->
              requestContentType = 'multipart/form-data'

@@ -6,8 +6,8 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-
-        "/"(view:"/index")
+        
+        "/"(view:"/camaraOcr/index")
         "500"(view:'/error')
 	}
 }

@@ -19,7 +19,7 @@ class OcrService {
     def serviceMethod() {
 
     }
-     def Ocr(String convertirBase64,String  key, String  inst, String ine ){
+        def Ocr(String convertirBase64,String  key, String  inst, String ine ){
         def  imagenBase64 = convertirBase64.tokenize(',')[1]
         def resultado =[:]
         File archivo = new File("Clasificador/Base64.txt");

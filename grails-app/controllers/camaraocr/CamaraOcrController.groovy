@@ -18,7 +18,9 @@ import java.util.Scanner;
 import la.kosmos.app.ClasificadorLibertadServiceConstants
 import la.kosmos.app.LibertadServiceConstants;
 import la.kosmos.app.OcrLibertadServiceConstants
-
+import org.kosmos.ocr.util.KOcrConstants;
+import camaraocr.KFileService;
+import com.google.gson.Gson
 class CamaraOcrController {
  
    interface ServiceConstants {
@@ -33,13 +35,18 @@ class CamaraOcrController {
      
     def OcrService ;
     def ClasificadorIneService ;
-   
+    
+    /*Mike Martínez */
+        def kFileService
+        def kosmosOcrService        
+    /*Fin Mike Martínez */
     def index() { }
     
     
-    def capturaImagen(){
+    /*def capturaImagen(){
         def urlimagen= params.snap
         String ine = "ine_ife"
+        println "params.snap ---> " + params.snap
         def imagen = ClasificadorIneService.clasificador(urlimagen,datos.getKey(),datos.getInstitucion())
         println"Que trae" + imagen
            if(imagen=='INE/IFE'){    
@@ -56,10 +63,44 @@ class CamaraOcrController {
                   render respuesta as JSON
               }  
               }
-               else{
-           
+               else{           
         }
+    }*/
     
     
+    
+    
+    /*Mike Martínez*/
+    
+
+    
+    def getClasificationAndDataFile(){
+        def urlimagen= params.snap
+        Gson gson = new Gson()
+        def response = [:]
+        if(kFileService == null){println "Error El bean de kFileService"}
+        String pathFile = kFileService.saveFile(urlimagen);        
+        def responseKOcr = kosmosOcrService.serviceClasificadorDeArchivos(pathFile,KOcrConstants.FILE_KEY, KOcrConstants.FILE_INSTITUCION);
+        //File image, String key, String inst, String categoria){
+        def responseOCRData = kosmosOcrService.serviceOCRDATA(new File(pathFile), 
+              KOcrConstants.KEY_STRING_LIBERTAD, KOcrConstants.LIBERTAD_INSTITUCION, 
+              KOcrConstants.INE);
+        println "###################### responseKOcr #################################";
+        println "responseKOcr --> " + gson.toJson(responseKOcr);
+        println "###################### responseOCRData #################################";
+        println "responseOCRData --> " + gson.toJson(responseOCRData);
+        response.dataCategoria =  responseKOcr;        
+        responseOCRData.data.responseService = gson.toJson(responseOCRData.data.responseService);
+        response.dataOCR =  responseOCRData;
+        render response as JSON;                
     }
+    
+    
+    
+   def getComponenteOCR(){
+       render(template: "/templates/generales/camaraOcr/camera"); 
+   }
+   
+    
+    /*Fin Codigo Mike MArtínez */
 }
