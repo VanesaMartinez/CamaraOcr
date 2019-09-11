@@ -8,15 +8,16 @@ var H_INCHES = 2.23;
 var W_INCHES = 3.38;
 var DPI_LIMIT = 300;
 $(document).ready(function () {
+    scriptInit();
     var snapButton = $("#iconflex");
-    snapButton.click( function (e) {
+    snapButton.click(function (e) {
         let video = $("#videoInput");
         var image = $("#canvasPhoto");
         e.preventDefault();
         var snap = takeSnapshot();
         image.attr("src", snap);
         image.addClass("visible");
-        image.attr("type", "img");     
+        image.attr("type", "img");
         video.stop();
         capturaImagen(snap);
     });
@@ -70,8 +71,17 @@ $(document).ready(function () {
 
             let video = document.getElementById("videoInput");
             video.srcObject = stream;
-            video.play();            
-            video.width = 2000;
+            video.play();
+            //video.height = window.outerHeight;
+            video.width = window.outerWidth + 50;
+//      var ua = navigator.userAgent.toLowerCase();
+//      var is_safari = ua.indexOf("safari/") > -1 && ua.indexOf("chrome") < 0;
+//      if (is_safari) {
+//        setTimeout(function() {
+//          video.play();
+//        });
+//      src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+//      cap = new cv.VideoCapture(video);
 
             let {width, height} = stream.getTracks()[0].getSettings();
             let pointCount = video.height * video.width;
@@ -82,20 +92,27 @@ $(document).ready(function () {
 
             function processVideo() {
                 try {
-                     let brightness = calculateBrightness(
+                    let brightness = calculateBrightness(
                             reducedMap,
                             (width / 2) * (height / 2)
                             );
                     let laplace = blurInput(reducedMap);
                     reducedMap.delete();
+
+                    let alert = document.getElementById("alert-camera");
                     var element = document.getElementById("photo-button");
 
                     if (
                             brightness > HIGH_BRIGHTNESS_LIMIT ||
                             brightness < LOW_BRIGHTNESS_LIMIT //||
+                            //laplace < 80
                             ) {
+                        alert.style.visibility = "visible";
                         element.classList.add(".icon-deseable");
+                        document.getElementById("alert-text").innerHTML =
+                                "variance:" + laplace + " - brightness:" + brightness;
                     } else {
+                        alert.style.visibility = "hidden";
                         element.classList.remove(".icon-deseable");
                     }
                     setTimeout(processVideo, 1000 / FPS);
@@ -105,12 +122,15 @@ $(document).ready(function () {
                 }
             }
             let delay = 1000 / FPS;
+            setInterval(processVideo, delay);
             setTimeout(processVideo, 1000 / FPS);
         });
         camara.catch(function (stream) {
             console.log("Eroor");
+
         });
     } else {
+
         document.getElementById("alert-text").innerHTML = "Navegador no soportado";
         alert.style.visibility = "visible";
     }
@@ -138,23 +158,23 @@ $(document).ready(function () {
                         '<option value=3>TELMEX</option>' +
                         '<option value=4>N/A</option>' +
                         '</select><br>' +
-                        ' Nombre:<br>'+                        
-                        ' <input type="text" name="firstname" value="'+dataNombre.Nombre +' '+dataNombre[x] + ' '+dataNombre["Apellido Materno"] +'">' +
+                        ' Nombre:<br>' +
+                        ' <input type="text" name="firstname" value="' + dataNombre.Nombre + ' ' + dataNombre[x] + ' ' + dataNombre["Apellido Materno"] + '">' +
                         '<br>' +
                         'Data:<br>' +
-                        ' <input type="text" name="lastname" value="">'+
+                        ' <input type="text" name="lastname" value="">' +
                         '<br><br>' +
                         '</form>');
-                if(response.dataCategoria.data.documento === "INE/IFE"){
+                if (response.dataCategoria.data.documento === "INE/IFE") {
                     $("#tipoDocumento").val(1);
-                }else if(response.dataCategoria.data.documento === "CFE"){
+                } else if (response.dataCategoria.data.documento === "CFE") {
                     $("#tipoDocumento").val(2);
-                }else if(response.dataCategoria.data.documento === "TELMEX"){ 
+                } else if (response.dataCategoria.data.documento === "TELMEX") {
                     $("#tipoDocumento").val(3);
-                }else{
+                } else {
                     $("#tipoDocumento").val(4);
                 }
-                
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
             }
@@ -164,6 +184,21 @@ $(document).ready(function () {
 
 });
 
+var scriptInit = function () {
+    var alturaP = window.screen.availHeight - 100;
+    var anchoP = window.screen.availWidth - 100;
+    console.log("alturaP" + alturaP, "Ancho " + anchoP);
+    var altura = parseInt(alturaP) / 636;
+    var ancho = parseInt(anchoP) / 1014;
+    console.log("alturaP" + altura, "Ancho " + ancho);
+    var x = Math.min(altura, ancho);
+    console.log("min:" + x);
+    w = (x) * 636;
+    h = (x) * 1014;
+    console.log("total altura :" + w, "total ancho" + h);
+    document.getElementById("Pantalla").style.height = w + "px";
+    document.getElementById("Pantalla").style.width = h + "px";
+};
 
 
 
