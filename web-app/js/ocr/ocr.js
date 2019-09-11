@@ -7,7 +7,7 @@ var HIGH_BRIGHTNESS_LIMIT = 200;
 var H_INCHES = 2.23;
 var W_INCHES = 3.38;
 var DPI_LIMIT = 300;
-$(document).ready(function () {
+$(document).ready(function () { 
     scriptInit();
     var snapButton = $("#iconflex");
     snapButton.click(function (e) {
