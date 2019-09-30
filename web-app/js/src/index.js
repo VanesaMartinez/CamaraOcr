@@ -13,7 +13,7 @@ $( document ).ready(function() {
    var snapButton = document.querySelector("#iconflex");
 snapButton.addEventListener("click", function(e) {
   let video = document.getElementById("videoInput");
-  var image = document.querySelector("#canvasPhoto");
+  var image = document.querySelector("#canvasOutput");
   e.preventDefault();
  
   var snap = takeSnapshot();
@@ -34,7 +34,7 @@ function takeSnapshot() {
 
   let video = document.getElementById("videoInput");
   // Here we're using a trick that involves a hidden canvas element.
-  var hidden_canvas = document.querySelector("canvas"),
+  var hidden_canvas = document.querySelector("#canvasOutput"),
     context = hidden_canvas.getContext("2d");
 
   var width = video.videoWidth,

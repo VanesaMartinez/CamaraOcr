@@ -24,13 +24,13 @@ class KFileService {
         BASE64Decoder decoder = new BASE64Decoder();
         byte[] imageByte = decoder.decodeBuffer(imagenBase64);
         BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageByte));         
-        File file = new File("/var/uploads/kosmos/documentos/archOcr/image.jpeg");
+        File file = new File("/var/uploads/kosmos/documentos/archOcr/image.png");
         file.createNewFile()        
         File imgOutFile = file;
-        ImageIO.write(image, "jpeg", imgOutFile);
+        ImageIO.write(image, "png", imgOutFile);
         }catch(Exception ex){
             ex.printStackTrace();
         }
-        return "/var/uploads/kosmos/documentos/archOcr/image.jpeg";
+        return "/var/uploads/kosmos/documentos/archOcr/image.png";
     }
 }

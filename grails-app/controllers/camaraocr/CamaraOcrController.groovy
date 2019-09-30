@@ -79,6 +79,7 @@ class CamaraOcrController {
         Gson gson = new Gson()
         def response = [:]
         if(kFileService == null){println "Error El bean de kFileService"}
+        println "imagen --> " + urlimagen
         String pathFile = kFileService.saveFile(urlimagen);        
         def responseKOcr = kosmosOcrService.serviceClasificadorDeArchivos(pathFile,KOcrConstants.FILE_KEY, KOcrConstants.FILE_INSTITUCION);
         //File image, String key, String inst, String categoria){

@@ -20,11 +20,12 @@
         <g:external  dir="css/src" file="styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <g:external dir="js" file="sweetalert.min.js"/>      
-        <g:external dir="js/ocr" file="prueba.js"/>      
+        <g:external dir="js/ocr" file="KOcrConstants.js"/>
+        <g:external dir="js/ocr" file="prueba.js"/>                   
+        
     </head>
-    <body>	            
-        <button id= "viewOCR" class="glyphicon glyphicon-camera">OCR</button>
-        <div class="container" id="container">                        
+    <body>	                    
+        <div class="container-fluid" id="container">   
         </div>                               
     </body>	                
 </html>

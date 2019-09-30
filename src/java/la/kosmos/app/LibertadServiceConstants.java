@@ -4,20 +4,18 @@
  * and open the template in the editor.
  */
 package la.kosmos.app;
-import camaraocr.ServiceConstants;
+import la.kosmos.app.api.IServiceConstants;
 /**
  *
  * @author hp
  */
-public abstract class LibertadServiceConstants implements ServiceConstants{
+public abstract class LibertadServiceConstants implements IServiceConstants{
  public static String INSTITUCION = "libertad";
     
- @Override
     public String getInstitucion() {
         return INSTITUCION;
     }
 
- @Override
     public abstract String getKey();
 
     public String datos(String ServiceConstants) {

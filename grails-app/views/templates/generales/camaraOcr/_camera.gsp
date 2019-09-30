@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-md-4">
             <div class="video">                         
-                        <video id="videoInput" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"/>                   
+                        <video id="videoInput" width=500 height=500 frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"/>  
+                        <canvas id="canvasOutput" width=320 height=240/>
             </div>        
             <div class="photo-place" id="Pantalla">
                 <div class="m-content" id="photo-focus">
@@ -26,5 +27,8 @@
         </div>
     </div>            
 </div>     
-<canvas id="canvasPhoto" height="0" width="0" ></canvas>
- <g:external dir="js/ocr" file="ocr.js"/>
+<script src="js/ocr/ocr.js" type="text/javascript" dir="js" file="ocr.js"></script>
+<script src="js/openCV/adapter-5.0.4.js" type="text/javascript" dir="js" file="adapter-5.0.4.js"></script>
+<script src="js/openCV/utils.js" type="text/javascript" dir="js" file="utils.js"></script>
+<script src="js/ocr/myScript.js" type="text/javascript" dir="js" file="myScript.js"></script>
+     
